@@ -1,0 +1,1765 @@
+=== Début du document : ./CoursPDF/5.Cours-Reg-LOG-ETUDIANT.pdf ===
+
+--- Page 1 ---
+1
+ 
+ 
+Data analysis:
+which methods to use ?
+Reality: complex result which involved many variables
+n mesures de Y à expliquer ou prédire par p variables explicatives
+a) Point de vue explicatif : (échantillon d'apprentissage)
+Discriminer (séparer au mieux) les k classes à l'aide des p variables
+Quelles sont les variables (X1,X2,...,Xp) qui permet de discriminer les k classes ? 
+Recherche de combinaisons des p variables qui séparent au mieux les k classes
+b) Point de vue décisionnel : (échantillon de validation)
+Prédire l'appartenance d'un nouveau sujet à une classe  à partir de cette 
+discrimination (après validation de la règle de décision)
+==> Construire une règle d'affectation de nouveaux individus à l'un des groupes
+pb de classement et non de classification (pas de création de classes)
+METHODES SUPERVISEES
+
+
+--- Page 2 ---
+2
+•
+régression linéaire « ordinaire »
+variable réponse Y = variable aléatoire quantitative
+variable explicatives quelconques
+•
+régression logistique
+variable réponse Y = variable aléatoire qualitative dichotomique (binaire)
+variables explicatives quelconques
+ex :
+survie/décès vs thérapies et facteurs de risque
+malade/non malade vs facteurs environnementaux, physiologiques (âge,
+sexe, poids, sportifs, tabac, pollution)
+druggabilité vs caractéristiques physico-chimique des poches
+activité vs caractéristiques physico-chimique des composés
+Pourquoi la régression linéaire classique n'est-elle pas 
+adaptée ?
+le modèle linéaire p(x) = b0 + b1x convient mal lorsque X est continue pour prédire une
+probabilité entre 0 et 1
+ex : prédire la présence ou l'absence d'une maladie cardiovasculaire selon la pression
+artérielle
+un modèle linéaire peut prédire des valeurs < 0 ou > 1. Prédire une droite non adapté
+
+
+--- Page 3 ---
+3
+Transformation logit
+5
+• Application de la transformation logit permet de travailler sur 
+des valeurs entre [-∞;+∞]:
+logit(p(X)) = ln
+p(X)
+1−p(X)
+"
+#$
+%
+&'
+= β0 + β1Xi1(+β2Xi2 +...+ βkXik)
+Modèle de régression logistique
+Module M2ISDD Analyse de données
+• RÉGRESSION LOGISTIQUE (RL)
+• Régression logistique binaire liaison entre 
+une variable qualitative à deux classes et un 
+ensemble de variables aléatoires quelconques
+Ac Camproux
+
+
+--- Page 4 ---
+4
+Le modèle de régression logistique = méthode multivariée de référence
+si la variable dépendante Y est qualitative à 2 modalités (0 et 1):
+type présence/absence, succès/échec.
+On cherche à expliquer la survenue d’un événement Y par sa
+probabilité de succès
+La RL quantifie la force de l’association entre chaque variable
+descriptive Xp et la variable réponse Y, en tenant compte de l’effet des
+autres variables Xj intégrées dans le modèle (mesures ajustées)
+Etude simultanée de l'association entre différents facteurs d'exposition
+(l’âge, le tabagisme) et la survenue de Y (maladie, complication)
+Module M2ISDD Analyse de données
+Objectif de la régression logistique
+• + facile de raisonner et de prendre des décisions sur un critère 
+qualitatif (malade ou non) que sur un critère quantitatif: technique 
+multivariée de très loin la + utilisée dans la littérature scientifique 
+biomédicale
+• permet l'estimation des odds-ratio avec une interprétation plus 
+intuitive que celle d'un coefficient de régression.
+==> Grand nombre d’applications:
+• Identification des facteurs liés à une maladie
+• Recherche des causes de décès ou de survie de patients
+• Détection de molécules toxiques
+• Prédiction de druggabilité d’une poche protéique
+Module M2ISDD Analyse de données
+Objectif de la régression logistique
+
+
+--- Page 5 ---
+5
+9
+I.
+Spécification du modèle de régression logistique
+II. Estimations des coefficients
+III. Sélection des variables et interprétation des 
+coefficients
+IV. Adéquation et performance du modèle
+IV. Protocole d’analyse (Applications et règles)
+Module M2ISDD Analyse de données
+Plan
+variable dépendante Y à prédire est une variable binaire (O/N) 
+- 0 en cas de non occurrence de l’événement.
+- 1 succès si occurrence de l’événement
+mesurée sur un échantillon de N individus: (Y1,Y2,…,YN) 
+(X1, X2,…, Xp) : p variables de la population mesurées sur un 
+échantillon de N individus, qualitatives ou quantitatives
+(Y, X1, X2,…, Xp) : mesurées sur l’échantillon de N individus.
+(yi,xi) est le vecteur des réalisations de (Y,X) de l’individu i
+Module Analyse de données
+I.Spécification du modèle de régression logistique
+
+
+--- Page 6 ---
+6
+LOI DE Y
+11
+• Y suit une loi de Bernoulli de paramètre p entre [0;1]
+• Application de la transformation logit sur la probabilité 
+permet de travailler sur des valeurs entre [-∞;+∞]:
+logit(p(X)) = ln
+p(X)
+1−p(X)
+"
+#$
+%
+&'
+= β0 + β1Xi1(+β2Xi2 +...+ βkXik)
+E(Yi) = pi
+I. Spécification du modèle de régression logistique
+12
+p(X) =
+eβ0+β1X
+1+eβ0+β1X
+Log( p(X)
+1−p(X)) = β0 + β1X
+ou
+Probabilité d'une maladie cardiaque
+en fonction de l'age
+AGE
+70
+60
+50
+40
+30
+20
+10
+Prob(Y=1 / X)
+1.0
+.8
+.6
+.4
+.2
+0.0
+Fonction de lien : Logit
+Modèle de régression logistique
+
+
+--- Page 7 ---
+7
+50
+100
+150
+0,0
+0,5
+1,0
+X
+E(Y)
+E(Y) = exp(-10 + 0,1X)
+1 + exp(-10 + 0,1X)
+50
+100
+150
+0,0
+0,5
+1,0
+X
+E(Y)
+E(Y) = 
+exp(10 - 0,1X)
+1 + exp(10 - 0,1X)
+- monotone croissante ou décroissante, selon le signe de b1
+- presque linéaire lorsque E(Y) est [0.2;0.8], proche de 0 et 1
+aux 2 extrémités 
+-forme sigmoïde = forme de relation souvent observée entre
+une « dose » d’exposition et la fréquence d’une maladie.
+Module M2ISDD Analyse de données
+Propriétés de la fonction logistique
+14
+I.
+Spécification du modèle de régression logistique
+II. Estimations des coefficients du modèle
+III. Sélection des variables et interprétation des 
+coefficients
+IV. Adéquation et performance du modèle
+IV. Protocole d’analyse (Applications et règles)
+Module M2ISDD Analyse de données
+Plan
+
+
+--- Page 8 ---
+8
+15
+intercept               coefficients de régression 
+II. Estimation des paramètres de la 
+régression logistique
+)
+X
+β
+...
+X
+β
+X
+β
+exp(β
+1
+)
+X
+β
+...
+X
+β
+X
+β
+exp(β
+p
+)
+E(Y
+ip
+p
+i2
+2
+i1
+1
+0
+ip
+p
+i2
+2
+i1
+1
+0
+i
+i
++
++
++
++
++
++
++
++
++
+=
+=
+• Le modèle de régression logistique multiple est défini par
+• Les paramètres sont estimés par la méthode du 
+maximum de vraisemblance
+b0                    b1, b2, … , bq
+• Par la méthode du maximum de vraisemblance.
+La vraisemblance d’un n-échantillon Y1,Y2,…,Ynest définie 
+comme la probabilité d’observer cet échantillon.
+• Estimation des paramètres sans biais et de faible variance
+• Bonnes propriétés statistiques si la taille de léchantillon 
+est grande par rapport au nombre de paramètres à estimer
+16
+II. Estimation des paramètres de la 
+régression logistique
+
+
+--- Page 9 ---
+9
+Vraisemblance des données
+c'est une fonction de b0 et b1
+V(données)=
+pr(Y = yi / X = xi)
+i=1
+n
+∏
+V(données)=
+π(xi)yi 1−π(xi)
+(
+)
+1−yi
+i=1
+n
+∏
+V(données)=
+eβ0+β1x
+1+eβ0+β1x
+⎛
+⎝
+⎜
+⎜
+⎞
+⎠
+⎟
+⎟
+yi
+1
+1+eβ0+β1x
+⎛
+⎝
+⎜⎜
+⎞
+⎠
+⎟⎟
+1−yi
+i=1
+n
+∏
+vraisemblance d'un échantillon
+= probabilité d'observer ces données [(x1,y1), (x2,y2), ..., (xn,yn),] si on suppose
+que le modèle est vrai
+= produit des probabilités
+recherche des paramètres maximisant la vraisemblance, cad dérivées
+partielles de la vraisemblance nulle
+on passe par le log-Vraisemblance
+Estimation du maximum de vraisemblance
+pour une variable X1
+on cherche ^b0 et ^b1 maximisant la L(b0, b1)
+L(β0,β1)=log V(données)
+(
+) =log
+π(xi)yi 1−π(xi)
+(
+)
+1−yi
+i=1
+n
+∏
+⎛
+⎝
+⎜
+⎜
+⎞
+⎠
+⎟
+⎟
+L(β0,β1)=
+yilog
+π(xi)
+1−π(xi)
+⎛
+⎝
+⎜⎜
+⎞
+⎠
+⎟⎟+log 1−π(xi)
+(
+)
+⎛
+⎝
+⎜⎜
+⎞
+⎠
+⎟⎟
+i=1
+n
+∑
+L(β0,β1)=
+yi β0 +β1xi
+(
+)−log 1+eβ0+β1xi
+⎛
+⎝⎜
+⎞
+⎠⎟
+⎛
+⎝
+⎜
+⎞
+⎠
+⎟
+i=1
+n
+∑
+Estimation : log-vraisemblance pour une 
+variable X1
+p(X) =
+eβ0+β1X
+1+eβ0+β1X
+
+
+--- Page 10 ---
+10
+Estimation du maximum de vraisemblance
+pour une variable X1
+n On cherche                 maximisant la log-vraisemblance                
+n La matrice
+est estimée par la matrice                      qui nécessite la
+dérivée seconde ou la matrice hessienne
+1
+0
+ˆ
+et  
+  
+ˆ
+b
+b
+0
+1
+ˆ
+ˆ
+(
+,
+)
+L b b
+ú
+û
+ù
+ê
+ë
+é
+b
+b
+b
+b
+b
+b
+=
+b
+)
+ˆ(
+V
+)
+ˆ,
+ˆ(
+Cov
+)
+ˆ,
+ˆ(
+Cov
+)
+ˆ(
+V
+)ˆ(
+V
+1
+1
+0
+1
+0
+0
+1
+2
+ˆ
+( )
+'
+L
+-
+=
+é
+ù
+¶
+-
+ê
+ú
+¶ ¶
+ë
+ûb
+b
+b
+b b
+Utilisation de procédure approchée, la + connue =méthode Newton-Raphson 
+(méthode itérative du gradient) pour obtenir une solution satisfaisante de la 
+maximisation. 
+Saporta
+Estimation du maximum de vraisemblance
+pour une variable X1
+n On cherche                    maximisant la
+log-vraisemblance                .
+n La matrice
+est estimée par la matrice  
+1
+0
+ˆ
+et  
+  
+ˆ
+b
+b
+0
+1
+ˆ
+ˆ
+(
+,
+)
+L b b
+ú
+û
+ù
+ê
+ë
+é
+b
+b
+b
+b
+b
+b
+=
+b
+)
+ˆ(
+V
+)
+ˆ,
+ˆ(
+Cov
+)
+ˆ,
+ˆ(
+Cov
+)
+ˆ(
+V
+)ˆ(
+V
+1
+1
+0
+1
+0
+0
+1
+2
+ˆ
+( )
+'
+L
+-
+=
+é
+ù
+¶
+-
+ê
+ú
+¶ ¶
+ë
+ûb
+b
+b
+b b
+procédure approchée, +connue = méthode 
+Newton-Raphson 
+
+
+--- Page 11 ---
+11
+Saporta
+• s²(βj) =variances des estimateurs telles que la 
+matrice de variance-covariance soit de la forme :
+)
+X
+β
+...
+X
+β
+X
+β
+exp(β
+1
+)
+X
+β
+...
+X
+β
+X
+β
+exp(β
+p
+)
+E(Y
+ip
+p
+i2
+2
+i1
+1
+0
+ip
+p
+i2
+2
+i1
+1
+0
+i
+i
++
++
++
++
++
++
++
++
++
+=
+=
+II. Estimation des paramètres de la 
+régression logistique
+II. Test de significativité globale du modèle 
+à p variables
+• La statistique de test est:
+ RV= (-2.ln(vraisemblance au maximum de Mnul)] - (-
+2.ln(vraisemblance au maximum de Mp)]
+Et suit un Khi-deux à p degrés de liberté
+• Si RV > χ²(p)
+On rejette H0, le modèle
+multivarié Mp est meilleur que le modèle nul Mnul,
+les p variables explicatives ont simultanément une
+influence sur la probabilité d’apparition de
+l’évènement étudié
+
+
+--- Page 12 ---
+12
+23
+Variables
+moyenne (écart-type)
+Age à l'inclusion
+32,38 (6,19)
+Score de dépression de Beck à l'inclusion
+17,37 (9,33)
+Nombre de traitements anti-drogue
+précédemment suivis
+4,54 (5,48)
+Variables
+n (%)
+Histoire d'utilisation de drogues par voie intraveineuse à l'inclusion
+jamais
+223 (38,78)
+ancienne
+109 (18,96)
+récente
+243 (42,26)
+Origine
+européenne
+430 (74,78)
+autre
+145 (25,22)
+Durée du traitement
+courte
+289 (50,26)
+longue
+286 (49,74)
+Site du programme de traitement
+A
+400 (69,57)
+B
+175 (30,43)
+Reprise de consommation de drogues avant la fin prévue du programme de traitement
+oui
+428 (74,43)
+non
+147 (25,57)
+Description des données
+Exemple consommation de drogues
+24
+Description des données
+• REPRISE : reprise de consommation de drogues avant la fin
+prévue du programme de traitement
+(0=non ; 1=oui)
+• SITE : site du programme (0=A, 1=B)
+AGE : âge à l’inclusion
+BECK : score de dépression de BECK à l’inclusion (de 0.0 (normal) à 54.0 
+(dépression)
+IVHX : histoire d’utilisation de drogues par voie intraveineuse à l’inclusion 
+(1=jamais; 2=ancienne ; 3=récente)
+• NBTRAIT : nombre de traitements anti-drogue
+précédemment suivis (de 0 à 40)
+• origine : origine (0=européenne, 1=autre)
+DUREE : durée du traitement attribuée par tirage au sort à l’inclusion 
+(0=courte ; 1=longue)
+Exemple consommation de drogues
+
+
+--- Page 13 ---
+13
+25
+Exemple consommation de drogues
+II.
+Application
+
+
+--- Page 14 ---
+14
+II.
+Application
+28
+I.
+Spécification du modèle de régression logistique
+II. Estimations des coefficients du modèle
+III. Sélection des variables et interprétation des 
+coefficients
+IV. Adéquation et performance du modèle
+IV. Protocole d’analyse (Applications et règles)
+Module M2ISDD Analyse de données
+Plan
+
+
+--- Page 15 ---
+15
+III. Sélection de variables
+Dans la pratique, si on dispose de beaucoup de variables disponibles, 
+Il peut y en avoir des plus ou moins pertinentes, des redondantes
+Trop de variables tue l’interprétation et danger de sur-
+apprentissage
+29
+30
+III. Test de significativité d’un modèle de 
+régression logistique
+les paramètres estimés sont-ils significatifs ? ó sont-ils différents de 0 ?
+H0 : b0 = b1 = ... = bp = 0
+H1 : un des coefficients bk est différent de 0
+test du rapport de vraisemblance = test global
+test de Wald = test pour chaque variable
+
+
+--- Page 16 ---
+16
+31
+III. Test de significativité globale d’un 
+modèle de régression logistique
+• Les variables explicatives influencent-elles simultanément 
+et significativement le risque de survenue de l’événement
+è Test du rapport de vraisemblance pour sélectionner les 
+variables pertinentes
+)
+X
+β
+...
+X
+β
+X
+β
+exp(β
+1
+)
+X
+β
+...
+X
+β
+X
+β
+exp(β
+p
+)
+E(Y
+ip
+p
+i2
+2
+i1
+1
+0
+ip
+p
+i2
+2
+i1
+1
+0
+i
+i
++
++
++
++
++
++
++
++
++
+=
+=
+les paramètres estimés sont-ils significatifs ? ó sont-ils différents de 0 ?
+H0 : b0 = b1 = ... = bp = 0
+H1 : un des coefficients bk est différent de 0
+test du rapport de vraisemblance = test global
+test de Wald = test pour chaque variable
+• Compare 2 modèles emboités:
+M1: k paramètres
+M2: p paramètres (p>k)
+• Les hypothèses de test sont:
+• La statistique de test est:
+RV= (-2.ln(vraisemblance au maximum de M1)] -
+(-2.ln(vraisemblance au maximum deM2)]
+• RV suit une loi du Khi-deux à (p-k) degrés de liberté
+• Si RV > χ²(p), on rejette H0, le modèle M2 est meilleur que le M1, 
+les variables explicatives ont simultanément une influence sur la 
+probabilité d’apparition de l’évènement étudié.
+Régression logistique : test du rapport de 
+vraisemblance pour un ensemble de variables bj
+
+
+--- Page 17 ---
+17
+Test du rapport de vraisemblance
+Modèles emboités : test de la déviance
+2 modèles :
+Modèle M1 à k paramètres
+Modèle M2 à p paramètres (p > k)
+Hypothèses testées :
+H0 : Choix de M1
+H1 : Choix de M2
+comparer de la vraisemblance des 2 modèles
+Statistique du test :
+-2lnV(M1) – 2lnV(M2) ~ c2p-k ddl
+Déviance d’un modèle D :
+H0 est rejetée si :
+D = −2lnV
+Statistique du test :
+−2ln
+VH0
+VH1
+⎛
+⎝
+⎜
+⎜⎜
+⎞
+⎠
+⎟
+⎟⎟
+! χddl0−ddl1
+2
+−2ln
+VH0
+VH1
+⎛
+⎝
+⎜
+⎜⎜
+⎞
+⎠
+⎟
+⎟⎟
+> χddl0−ddl1
+2
+D0 −Dcomplet > χddl0−ddl1
+2
+M2 est meilleur que M1, les p-k variables explicatives ont simultanément une 
+influence sur  la probabilité d’apparition de l’évènement étudié
+test du rapport de vraisemblance, modèles emboités : test de la déviance
+H0 : on choisit M1, modèle « nul » avec seulement l’intercept
+H1 : on choisit M2, modèle d’intérêt
+summary(dt.lor)
+…
+Null deviance: 277.259
+on 199
+degrees of freedom
+déviance du modèle sans la variable d’intérêt
+(pression), avec seulement l’intercept
+Residual deviance:
+16.645
+on 198
+degrees of freedom
+déviance du modèle
+complet, avec la variable d’intérêt
+test du rapport de vraisemblance :
+D" −D$%&'() = D+,-./%0 = 277 −17 = 260
+Dresidu = 17
+>
+le test est significatif
+D0 −Dcomplet > χddl0−ddl1
+2
+χ1ddl
+2
+= 0.45
+Test du rapport de vraisemblance
+
+
+--- Page 18 ---
+18
+39
+Régression logistique multiple : test de 
+significativité pour une variable Xj
+• M1: Modèle sans la variable testée Xj
+• M2: Modèle avec la variable testée Xj
+• On teste:
+Test de significativité de Wald pour une 
+variable Xj
+Le modèle
+x
+x
+1
+0
+1
+0
+e
+1
+e
+)
+x
+X
+/
+1
+Y
+(
+P
+)
+x
+(
+b
++
+b
+b
++
+b
++
+=
+=
+=
+=
+p
+Test
+H0 : b1 = 0
+H1 : b1 ¹ 0
+Statistique utilisée
+2
+1
+2
+1
+ˆ
+Wald
+s
+b
+=
+Décision de rejeter H0 au risque a
+Rejet de H0 si Wald 
+)1(
+2
+1 a
+-
+c
+³
+
+
+--- Page 19 ---
+19
+Test de Wald
+H0 : bpression = 0
+H1 : bpression ≠0
+Coefficients:
+Estimate Std. Error z value Pr(>|z|)
+(Intercept) -33.1389
+8.5702
+-3.867 0.000110 ***
+pression
+3.3979
+0.8973
+3.787 0.000153 ***
+test significatif
+W = βi
+sβi
+= 3.39
+0.89
+=3.78
+ε5% =1.96
+Sélection de variables
+Dans la pratique, si on dispose de beaucoup de variables disponibles, 
+il peut y en avoir des plus ou moins pertinentes, des redondantes
+Trop de variables tue l’interprétation
+Comme pour la régression linéaire, des méthodes pas-à-pas efficaces 
+existent:
+è méthode stepwise (pas à pas progressive) permet d'obtenir un 
+modèle performant évitant les variables qui n'apportent que peu 
+d'information au modèle  (Forward ou backward)
+43
+
+
+--- Page 20 ---
+20
+L’estimateur de β0 permet de calculer la proportion 
+observée de malades n’ayant pas le symptôme (X=0)
+ L’estimateur de β1 permet d’avoir l’odds ratio quand X1
+augmente d’une unité: OR= exp(β1)
+Module M2ISDD Analyse de données
+Interprétation des coefficients : 
+recherche des facteurs de risque ou protecteurs d’un phénomène
+Cas d’une seule variable binaire
+Odds Ratio ou rapport des cotes
+• X=0 : symptôme absent
+• X=1 : symptôme présent
+• Y=0: maladie absente
+• Y=1: maladie présente
+On a donc:
+Module M2ISDD Analyse de données
+
+
+--- Page 21 ---
+21
+• Odds ratio OR ou « rapport des cotes » RC 
+• OR=1, la maladie est indépendante du symptôme
+• OR>1, la maladie est plus fréquente pour les individus qui ont 
+le symptôme.
+• OR<1, la maladie est plus fréquente pour les individus qui 
+n’ont pas le symptôme.
+Module M2ISDD Analyse de données
+ln(odds1
+odds0
+) = ln(β0 + β1(Xi +1)
+β0 + β1(Xi) ) = ln(OR(Xi)) = βi
+OR(Xi) = exp(βi)
+Qu’appelle-t-on la cote ou l’ « Odds »
+Modèle de régression logistique multiple
+RC quantifie le risque supplémentaire de maladie
+chez le fumeur X=1 par rapport au non fumeur 
+Le risque de maladie est multiplié par 1.5 par 
+année supplémentaire
+
+
+--- Page 22 ---
+22
+50
+Variables
+moyenne (écart-type)
+Age à l'inclusion
+32,38 (6,19)
+Score de dépression de Beck à l'inclusion
+17,37 (9,33)
+Nombre de traitements anti-drogue
+précédemment suivis
+4,54 (5,48)
+Variables
+n (%)
+Histoire d'utilisation de drogues par voie intraveineuse à l'inclusion
+jamais
+223 (38,78)
+ancienne
+109 (18,96)
+récente
+243 (42,26)
+Origine
+européene
+430 (74,78)
+autre
+145 (25,22)
+Durée du traitement
+courte
+289 (50,26)
+longue
+286 (49,74)
+Site du programme de traitement
+A
+400 (69,57)
+B
+175 (30,43)
+Reprise de consommation de drogues avant la fin prévue du programme de traitement
+oui
+428 (74,43)
+non
+147 (25,57)
+Description des données
+Exemple consommation de drogues
+51
+• Sélection des variables : Procédure descendante manuelle
+On élimine la variable avec la p-value la plus élevée
+1. On enlève la variable BECK (p-value=0.8748, la plus élevée)
+Exemple consommation de drogues
+
+
+--- Page 23 ---
+23
+Régression logistique multiple
+• Sélection des variables : Procédure descendante manuelle
+On élimine la variable avec la p-value la plus élevé
+1.
+On enlève la variable BECK (p-value=0.8748 qui est la plus élevée)
+Exemple consommation de drogues
+53
+2. On re-estime le modèle sans cette variable et on élimine la 
+variable avec une p value la plus élevée et > 0.05 … etc
+Exemple consommation de drogues
+
+
+--- Page 24 ---
+24
+54
+•RC (Age 2 VS 1) = 1.152   Avoir entre 28 et 33 ans augmente la probabilité de reprise 
+de drogue par rapport à un individu ayant un âge inférieur à 28 ans.
+•RC (DUREE) = 0.625   Un individu qui a une durée de traitement longue diminue sa
+probabilité de reprise de drogue, ajustée sur les autres variables explicatives.
+Régression logistique multiple
+Exemple consommation de drogues
+55
+I.
+Spécification du modèle de régression logistique
+II. Estimations des coefficients
+III. Sélection des variables et interprétation des 
+coefficients
+IV. Adéquation et performance du modèle
+IV. Protocole d’analyse (Applications et règles)
+Module M2ISDD Analyse de données
+Plan
+
+
+--- Page 25 ---
+25
+IV. Qualité d’un modèle de régression 
+logistique
+• Déterminer la qualité d’ajustement du modèle
+aux données.
+- test de Hosmer et Lemeshow = adéquation du
+modèle aux données
+- analyse des résidus = qualité du modèle
+• qualité du modèle: évaluation du pouvoir 
+discriminant du modèle 
+Si l’ajustement est correct, les valeurs prédites
+seront proches des valeurs observées.
+57
+IV. Adéquation du modèle
+Déterminer la qualité d’ajustement du modèle aux données.
+Si l’ajustement est correct, les valeurs prédites seront 
+proches des valeurs observées.
+èTest de Hosmer et Lemeshov utiliser pour valider la 
+bonne adéquation du modèle
+èanalyse des résidus qui mesurent les écarts entre les 
+observations et la probabilité prédite par des méthodes 
+graphiques
+
+
+--- Page 26 ---
+26
+59
+Test de Hosmer et Lemeshow
+• On mesure l’écart entre les valeurs prédites et observées en le 
+regroupant 
+Regroupement des probabilités prédites par le modèle en dix 
+groupes (déciles) regroupé en table de contingence
+• On accepte H0 : Le modèle est adéquat
+
+
+--- Page 27 ---
+27
+B. Test de Hosmer et Lemeshow
+Test de comparaison des répartitions observées et théoriques (prédites par le modèle)
+il évalue la concordance entre les valeurs prédites et les valeurs observées
+H0 : distance faible, ajustement bon
+H1 : distance élevée, ajustement mauvais
+l'objectif de ce test est d'évaluer si la distance entre les fonctions de densité
+observée et prédite est significative, cad si le modèle est bien calibré.
+on découpe l'espace des probabilités en 10 quantiles, et on obtient une
+table de contingence
+ResourceSelection::hoslem.test(dt$malade,
+dt.lor$fitted.values)
+Hosmer and Lemeshow goodness of fit (GOF) test
+data:
+dt$malade, dt.lor$fitted.values
+X-squared = 0.11756, df = 8, p-value = 1
+Analyse des résidus
+vérifier s'il n'y a pas d'erreurs systématiques (globales)
+déterminer si certaines observations sont particulièrement mal expliquées
+(résidus extrêmes, erreurs locales)
+déterminer si certaines observations ont un effet de levier important sur les
+résultats des estimations (erreurs locales)
+Différents types de résidus:
+résidus de Pearson
+résidus de Déviance
+rPi
+= yi −ˆµi
+V(ˆµi)
+rDi
+=
+disigne(yi −ˆµi)
+res.pearson = rstandard(herg.reglog.step, 
+type="pearson")
+res.deviance = rstandard(herg.reglog.step, 
+type="deviance")
+
+
+--- Page 28 ---
+28
+Adéquation du modèle
+• On accepte H0 à Le modèle est adéquat
+Exemple consommation de drogues
+A partir des bi significatifs estimés, application de la règle 
+bayésienne pour le classement d'un nouvel individu x dans un des 
+groupes
+Affectation à la  classe 1 si  
+ 
+lo g it P g1 x
+(
+)
+(
+)= lo g
+P g1 x
+(
+)
+1 - P g1 x
+(
+)
+æ 
+è 
+ç 
+ö 
+ø 
+÷ = lo g
+P g1 x
+(
+)
+P g 2 x
+(
+)
+æ 
+è 
+ç 
+ö 
+ø 
+÷ = b0 + b1x1 + ...+b p x p
+ b0 + b1x1 + b2 x 2 +. ..+bp' x p' > Seuil
+Point de vue prédictif 
+seuil (s)
+
+
+--- Page 29 ---
+29
+64
+Performance de prédiction
+Sortie de la régression logistique: 
+L’équation de régression logistique peut être utilisée à des fins 
+pronostiques = prédire la probabilité de survenue de Y quand la 
+valeur des k variables explicatives est connue
+è Test de la capacité prédictive du modèle sur un nouvel 
+échantillon de validation
+p(X) =
+eβ0+β1X
+1+eβ0+β1X
+De la probabilité à la prédiction 
+•
+relation non linéaire, mais sigmoïdale, le modèle logistique
+•
+on choisit un seuil s , permettant de décider si Y = 0 ou Y = 1
+•
+Pour commencer, on fixe s = 0.5
+
+
+--- Page 30 ---
+30
+taux de bien prédits, mesure à quel point le modèle prédit bien les données
+taux d’erreur, quantifie l’erreur faite par le modèle
+table de confusion
+réalité
+Y=1
+Y=0
+prédit
+Yprédit = 1
+VP
+FP
+Yprédit = 0
+FN
+VN
+tx debienprédit = VP+VN
+n
+tx d'erreur = FP+FN
+n
+Lorsque les classes (+, -) sont très déséquilibrées, les taux d’erreur donnent une fausse idée 
+de la qualité de l’apprentissage. La courbe ROC est une solution à ce problème ou le 
+coefficient de Matthew
+Pouvoir discriminant du modèle
+sensibilité, spécificité
+Pouvoir discriminant du modèle
+sensibilité, spécificité
+sensibilité : proportion d'individus prédits comme Y = 1, et bien classés
+= capacité à diagnostiquer les malades
+spécificité : proportion d'individus prédits comme Y = 0 qui sont bien classés
+= capacité à reconnaître les non-malades
+table de confusion pour un seuil fixé s
+réalité
+Y=1
+Y=0
+Prédit
+Yprédit = 1
+VP
+FP
+Yprédit = 0
+FN
+VN
+Se =
+VP
+VP+FN
+Sp =
+VN
+VN+FP
+
+
+--- Page 31 ---
+31
+Tableau de contingence
+• Nbb: 93+257/431=81,2%
+• Nbm: 50+31/431= 18,8%
+• Sensibilité: Se: 93/143 = 65%
+Sp: 257/288 = 89,2%
+IV. Adéquation du modèle
+Malade 
+(yi=1)
+Non Malade
+Total 
+(yi=0)
+Prédit malade (!" = 1) 
+Prédit non malade (!" = 0) 
+Total
+93
+31
+124
+50
+257
+307
+143
+288
+431
+Courbe ROC
+(Receiver Operating Characteristic)
+• Sensibilité : capacité à 
+prédire un évènement
+• Spécificité : capacité à 
+prédire un non-événement
+• Graphique ROC :
+y = Sensibilité(s) 
+x = 1 - Spécificité (s) 
+Coronary Hearth Disease ROC curve
+1 - Spécificité
+1.0
+.8
+.6
+.4
+.2
+0.0
+Sensitivité
+1.0
+.8
+.6
+.4
+.2
+0.0
+69
+s = 0.5
+L’aire sous la courbe ROC est une mesure du pouvoir prédictif de la variable X.  Ici 
+cette surface est égale à 0.8.
+Courbe de la druggability d’une poche en 
+fonction de son hydrophobicité pour différentes 
+valeurs de seuils C
+•
+Courbe croissante entre (0,0) et (1, 1) 
+•
+Meilleure est la prédiction, plus la courbe est au-dessus la 1 bissectrice. 
+
+
+--- Page 32 ---
+32
+Courbe ROC
+• Se en
+fonction de 1-Sp
+• L’aire sous la courbe:
+IV. Adéquation du modèle
+=0,5
+Aucune discrimination
+]0,5;0,7[
+Discrimination faible
+[0,7;0,8[
+Discrimination acceptable
+[0,8;0,9[
+Discrimination excellente
+[0,9;1]
+Discrimination parfaite
+
+
+--- Page 33 ---
+33
+Pouvoir discriminant du modèle
+IV. Application
+Exemple consommation de drogues
+extrait de « Courbe ROC », Ricco Rakotmalala
+Se
+
+
+--- Page 34 ---
+34
+B. taux d’erreur
+(table.lor = table(dt.fitted, dt$malade,
+dnn=c("predit","observe")))
+observe
+predit
+0
+1
+FALSE 99
+1
+TRUE
+1 99
+réalité
+Y=1
+Y=0
+prédit
+Yprédit = 1
+99
+1
+Yprédit = 0
+1
+99
+B. taux d’erreur
+(table.lor = table(dt.fitted, dt$malade,
+dnn=c("predit","observe")))
+observe
+predit
+0
+1
+FALSE 99
+1
+TRUE
+1 99
+(tx.bon = (table.lor[1,1] + table.lor[2,2]) / sum(table.lor))
+[1] 0.99
+(tx.erreur
+=
+(table.lor[1,2]
++
+table.lor[2,1])
+/
+sum(table.lor))
+[1] 0.01
+réalité
+Y=1
+Y=0
+prédit
+Yprédit = 1
+99
+1
+Yprédit = 0
+1
+99
+
+
+--- Page 35 ---
+35
+C. sensibilité, spécificité
+(table.lor = table(dt.fitted, dt$malade,
+dnn=c("predit","observe")))
+observe
+predit
+0
+1
+FALSE 99
+1
+TRUE
+1 99
+(Se = table.lor[1,1] / (table.lor[1,1] + table.lor[2,1]))
+[1] 0.99
+(Sp = table.lor[2,2] / (table.lor[2,2] + table.lor[1,2]))
+[1] 0.99
+réalité
+Y=1
+Y=0
+prédit
+Yprédit = 1
+99
+1
+Yprédit = 0
+1
+99
+E. Courbe ROC
+lor.prob <- ssAA.pred
+plot(lor.prob)
+sens <- NULL
+spec <- NULL
+for (seuil in seq(0.01, 0.99, 0.01)) {
+pred <- ifelse(lor.prob < seuil, 0, 1)
+table.lda <- table(pred, lor.val$drugg)
+sens <- c(sens, sensibilite(table.lda))
+spec <- c(spec, specificite(table.lda))
+}
+plot(1-spec, sens, type = "l", xlim = 
+c(0,1), ylim = c(0,1), col = "red")
+abline(a = 0, b = 1, lty = 2)
+
+
+--- Page 36 ---
+36
+78
+IV. Règles: 
+limites et avantages
+Module Analyse de données
+Régression logistique
+Avantages de la régression logistique
+• Pas dhypothèse de normalité ni dhomoscédasticité
+• Odds-ratios interprétables
+• Permet de traiter les variables explicatives discrètes, 
+qualitatives ou continues
+• Simple à comprendre et à appliquer
+• Modélise directement une probabilité
+79
+
+
+--- Page 37 ---
+37
+• Très sensible à la multicolinéarité entre les prédicteurs, (à tester 
+avec une matrice de corrélation. D'où la nécessité d'examiner les 
+corrélations entre les variables prédictives, afin d'éliminer 
+celles fortement corrélées (risques de variables redondantes).
+• Ne sapplique quaux données sans valeurs manquantes
+• Sensible aux individus hors normes
+• Bonnes propriétés statistiques si la taille de léchantillon est 
+grande par rapport au nombre de paramètres à estime
+(En pratique : nécessite des échantillons de grande taille pour un 
+niveau acceptable de stabilité. Un nombre minimal de cinquante (50) 
+observations par variable est en général nécessaire.
+80
+Limite de la R Logistique 
+81 81
+Règle de bonne conduite pour RL 
+- Préliminaire : analyse descriptive précise et complète (distribution 
+des variables, recodage, et/ou regroupement...) 
+- Analyse univariable par RL, odds-ratio calculés  =« bruts »
+-
+Inclure les variables liées suffisamment fort à Y : p-value <0,20 
+(car peuvent être influencées par d’autres variables et devenir 
+significatives dans un modèle multivariable )
++ des variables d’intérêt connu (même si p-value > 0,20)
+- analyse des odds-ratios « ajustés »
+Enfin, si la liaison entre deux variables est très forte (même 
+information), les coefficients du modèle peuvent ne pas être 
+correctement estimés (colinéarité entre variable).
+è bien sélectionner les variables initiales tant d’un point de vue 
+biologique que statistique
+
+
+--- Page 38 ---
+38
+A. Les différentes étapes
+•
+Avant toute application d’une méthode de prédiction,
+•
+IL FAUT REGARDER LES DONNEES
+•
+Analyse univariée
+•
+Représentation graphique des variables, histogramme et boxplot
+individuel
+•
+Analyse en Composante Principale
+•
+Et/ou Clustering avec kmean ou classification hiérarchique
+•
+Vérifier la colinéarité entre les variables prédictives
+A. Les différentes étapes
+Dans la pratique, si on dispose de beaucoup de variables 
+disponibles, il peut y en avoir des plus ou moins pertinentes, des 
+redondantes 
+Trop de variables tue l’interprétation et danger de sur-
+apprentissagee
+=> Sélection des descripteurs
+
+
+--- Page 39 ---
+39
+Ou régression logistique univariée
+À adapter aux data: 0.05 ou 0.01…
+Dépend du nb de variables, si pertinent
+ENLEVER LES VARIABLES TROP CORRELEES OU 
+COLINEAIRE 
+en ne gardant que celle la plus corrélée à Y 
+Se, Spe, vIF
+8787
+Références
+Agresti, A. (1990): 
+ Categorical Data Analysis, New York: John Wiley & Sons, Inc. 
+Hosmer, D.W. & Lemeshow, S. (1989): 
+ Applied Logistic Regression, New York: John Wiley & 
+Sons, Inc. 
+ 
+P. McCullagh & J.A. Nelder (1989): 
+Generalized Linear Models, Chapman & Hall, London. 
+Collet D. (1999):
+Modelling binary data, Chapman & Hall/CRC, Londres
+Tenenhaus M. (2007): Statistique, Dunod
+Penalized logistic regression, Mansiaux et al, 2014
+
+
+--- Page 40 ---
+40
+Evalua&on Criteria
+Variable selection
+Statistical criteria based on the likelihood of the model L and function 
+of the number of parameters p
+For each model ==> calculation of the log likelihood 
+L(a)= logV(a, k)
+Criteria: compare models with each other, (not necessarily nested 
+within each other) by penalizing the likelihood with the number of 
+parameters p 
+AIC = Akaike Informative Criterion = -2L+2p.      AIC min 
+BIC = Bayesian Informative Criterion estimated on n observations 
+= -2L+ p.log(n)
+BIC min
+Statistical criteria
+selection of descriptors
+
+
+--- Page 41 ---
+41
+Le problème de la séparation complète
+Séparation complète (ou quasi complète) des deux groupes: l’estimateur au 
+sens du maximum de vraisemblance n’existe pas. Il existe un vecteur de 
+pseudo-estimations qui affecte correctement tous les individus à leur 
+groupe. La configuration des données conduit à des estimations infinies, 
+sans unicité de l’estimateur. Lors des itérations, la probabilité prévue pour 
+chaque individu d’appartenir à son groupe réel tend rapidement vers 1 et le 
+log de la vraisemblance tend vers 0.
+Notons que des cas de séparation complète ou quasi-complète risquent de 
+se rencontrer dans le cas de petits échantillons. Remarquons que dans les 
+deux cas particuliers évoqués, l’analyse linéaire discriminante est 
+performante.
+E. Exemple : maladie = f(pression)
+on souhaite établir le modèle liant le risque de maladie cardiaque à la pression artérielle
+pression
+|malade |
+---------------|-------|
+Min.
+: 5.553 | 0:100 |
+1st Qu.: 7.622 | 1:100 |
+Median : 9.600 |
+Mean
+: 9.746 |
+3rd Qu.:11.828 |
+Max.
+:14.467 |
+dt.lor = glm(malade ~ pression, data = dt, family="binomial")
+summary(dt.lor)
+
+
+--- Page 42 ---
+42
+E. Exemple : maladie = f(pression)
+summary(dt.lor)
+Call:
+glm(formula = malade ~ pression, family = "binomial", data =
+dt)
+Deviance Residuals:
+Min
+1Q
+Median
+3Q
+Max
+-2.79400
+-0.03124
+-0.00021
+0.02303
+1.65713
+Coefficients:
+Estimate Std. Error z value Pr(>|z|)
+(Intercept) -33.1389
+8.5702
+-3.867 0.000110 ***
+pression
+3.3979
+0.8973
+3.787 0.000153 ***
+---
+Signif. codes:
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+soit b0 = -33,13 et b1 = 3,39
+93
+Test d’effet ou interaction entre 2 facteurs
+• On considère le modèle M2:
+Mais on se rend compte que l’effet de X2 n’est pas le même suivant 
+que X1 = 1 ou 0 alors on considère M3:
+Si β3 est significative, alors X2 modifie l’effet de X1 :
+ Si X2=0 -> l’effet de X1 est β1
+ Si X2=1 -> l’effet de X1 est β1+β3
+
+
+--- Page 43 ---
+43
+• On teste par le test du rapport de vraisemblance:
+!O: "# =0 
+!1: "# ≠ 0 
+• Si on rejette HO
+Il y a modification d’effet.
+On laisse l’interaction dans le 
+modèle.
+• Si on accepte HO
+On retire l’interaction.
+Test d’interaction entre 2 facteurs
+95
+Régression logistique multiple
+Exemple consommation de drogues
+
+
+--- Page 44 ---
+44
+96
+Etude de l’interaction entre deux variables
+proc logistic data=TP2.donnees
+descending;
+class age1 (ref='1') / param=ref;
+model REPRISE = NBTRAIT AGE1 NBTRAIT*AGE1;
+run;
+•La variable AGE  modifie-t-elle l’effet de la variable NBTRAIT sur la variable 
+dépendante REPRISE ?
+Exemple consommation de drogues
+97
+Etude de l’interaction entre deux variables
+• On rejette H0, l’interaction entre AGE et NBTRAIT est significative.
+AGE modifie donc la variable NBTRAIT sur la variable dépendante REPRISE
+  On garde le terme d’interaction. Il y a modification d’effet
+Exemple consommation de drogues
+
+
+--- Page 45 ---
+45
+http://larmarange.github.io/analyse-
+R/multicolinearite.html
+•
+Au sens strict, on parle de multicolinéarité parfaite lorsqu’une des 
+variables explicatives d’un modèle est une combinaison linéraire d’une ou 
+plusieurs autres variables explicatives introduites dans le même modèle. 
+L’absence de multicolinéarité parfaite est une des conditions requises pour 
+pouvoir estimer un modèle linéaire et, par extension, un modèle linéaire 
+généralisé (dont les modèles de régression logistique).
+•
+Dans les faits, une multicolinéarité parfaite n’est quasiment jamais 
+observée. Mais une forte multicolinéarité entre plusieurs variables peut 
+poser problème dans l’estimation et l’interprétation d’un modèle.
+•
+Une erreur fréquente est de confondre multicolinéarité et corrélation.
+Mesure de la colinéarité
+Il existe différentes mesures de la multicolinéarité. L’extension mctest en fournie plusieurs, mais 
+elle n’est utilisable que si l’ensemble des variables explicatives sont de type numérique.
+L’approche la plus classique consiste à examiner les facteurs d’inflation de la variance (FIV) ou 
+variance inflation factor (VIF) en anglais. Les FIV estiment de combien la variance d’un coefficient 
+est augmentée en raison d’une relation linéaire avec d’autres prédicteurs. Ainsi, un FIV de 1,8 
+nous dit que la variance de ce coefficient particulier est supérieure de 80 % à la variance que l’on 
+aurait dû observer si ce facteur n’est absolument pas corrélé aux autres prédicteurs.
+Si tous les FIV sont égaux à 1, il n’existe pas de multicolinéarité, mais si certains FIV sont 
+supérieurs à 1, les prédicteurs sont corrélés. Il n’y a pas de consensus sur la valeur au-delà de 
+laquelle on doit considérer qu’il y a multicolinéarité. Certains auteurs, comme Paul Allison, 
+regarder plus en détail les variables avec un FIV supérieur à 2,5. D’autres ne s’inquiètent qu’à 
+partir de 5. Il n’existe pas de test statistique qui permettrait de dire s’il y a colinéarité ou non.
+L’extension car fournit une fonction vif permettant de calculer les FIV à partir d’un modèle. Elle 
+implémente même une version généralisée permettant de considérer des facteurs catégoriels et 
+des modèles linéaires généralisés comme la régression logistique.
+VOIRE LE LIEN: https://statisticalhorizons.com/multicollinearity
+.
+
+
+--- Page 46 ---
+46
+
+
+=== Fin du document : ./CoursPDF/5.Cours-Reg-LOG-ETUDIANT.pdf ===
+

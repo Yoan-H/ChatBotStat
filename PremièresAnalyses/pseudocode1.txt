@@ -1,0 +1,75 @@
+Classe ChatbotHybride:
+
+    Fonction initialiser():
+        intentions = charger_base_intentions()
+        modele_ml = charger_modele_ml()
+        seuil_confiance_regles = 0.7
+        seuil_confiance_ml = 0.6
+        historique_conversation = []
+        base_connaissances = charger_base_connaissances()
+
+    Fonction traiter_message(message_utilisateur):
+        message_nettoye = preprocesser_texte(message_utilisateur)
+        
+        reponse_regles, confiance_regles = appliquer_regles(message_nettoye)
+        reponse_ml, confiance_ml = prediction_ml(message_nettoye)
+        
+        SI confiance_regles >= seuil_confiance_regles:
+            reponse_finale = reponse_regles
+        SINON SI confiance_ml >= seuil_confiance_ml:
+            reponse_finale = reponse_ml
+        SINON:
+            reponse_finale = demander_clarification()
+
+        mettre_a_jour_historique(message_utilisateur, reponse_finale)
+        RETOURNER reponse_finale
+
+    Fonction preprocesser_texte(texte):
+        texte_minuscule = convertir_minuscules(texte)
+        texte_tokenise = tokeniser(texte_minuscule)
+        texte_sans_stop_words = supprimer_stop_words(texte_tokenise)
+        texte_lemmatise = lemmatiser(texte_sans_stop_words) # utilisation NLP
+        RETOURNER texte_lemmatise
+
+    Fonction appliquer_regles(message):
+        POUR CHAQUE intention DANS intentions:
+            SI correspond_pattern(message, intention.patterns):
+                RETOURNER (generer_reponse(intention), 1)
+        RETOURNER (NULL, 0)
+
+    Fonction prediction_ml(message):
+        vecteur_message = vectoriser_texte(message)
+        prediction = modele_ml.predire(vecteur_message)
+        confiance = modele_ml.estimer_confiance(prediction)
+        reponse = generer_reponse_ml(prediction)
+        RETOURNER (reponse, confiance)
+
+    Fonction generer_reponse(intention):
+        contexte = extraire_contexte(historique_conversation)
+        reponse_template = selectionner_template(intention, contexte)
+        reponse = remplir_template(reponse_template, contexte)
+        RETOURNER reponse
+
+    Fonction demander_clarification():
+        clarifications = [
+            "Pouvez-vous reformuler ?",
+            "Je n'ai pas bien compris, pouvez-vous prŽciser ?",
+            "Pouvez-vous donner plus de dŽtails ?"
+        ]
+        RETOURNER choisir_aleatoirement(clarifications)
+
+    Fonction apprentissage_continu():
+        TOUTES LES 24 HEURES:
+            nouvelles_conversations = collecter_historique_journee()
+            SI taille(nouvelles_conversations) > seuil_apprentissage:
+                modele_ml.entrainer(nouvelles_conversations)
+                mettre_a_jour_base_connaissances(nouvelles_conversations)
+
+chatbot = ChatbotHybride()
+
+TANT QUE Vrai:
+    message = attendre_message_utilisateur()
+    SI message == "quitter":
+        STOP
+    reponse = chatbot.traiter_message(message)
+    afficher(reponse)

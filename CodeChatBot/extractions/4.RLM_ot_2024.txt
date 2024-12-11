@@ -1,0 +1,957 @@
+=== Début du document : ./CoursPDF/4.RLM_ot_2024.pdf ===
+
+--- Page 1 ---
+Data analysis – Multiple Linear Regression : Theory and 
+applications
+olivier.taboureau@u-paris.fr
+2024
+
+
+--- Page 2 ---
+Learning Objectives for today
+•
+Recap on what is a simple linear regression
+•
+To become familiar with multiple linear regression
+•
+To know how to evaluate the performance of these methods (R2, Q2, RMSE…)
+•
+To have an overview on which context these tools can be used and applied.
+•
+To select variables contributing the most to the rlm
+•
+To have hands on the methods using R package (lm)
+
+
+--- Page 3 ---
+PLAN
+• Simple linear regression
+• Multiple linear regression
+• Applications
+
+
+--- Page 4 ---
+Can be used to analyze very large data set!!!
+
+
+--- Page 5 ---
+• Discrimination: Assignment of an unknown 
+sample to a specific class among a predefined 
+number of classes (qualitative answer)
+• Regression: Prediction of a parameter value on 
+the basis of example data (quantitative answer)
+• Optimization: Selection of the best solution to a 
+problem among a set of possible solutions.
+Machine learning process
+Different machine learning process to apply in function of 
+the data you have
+
+
+--- Page 6 ---
+Recap - regression
+! The standard form for the regression equation or 
+formula is:
+Y = a + bX 
+! where 
+! Y is the estimated score for the dependent variable
+! X is the score for the independent variable 
+! b is the slope of the regression line, or the multiplier of X 
+! a is the intercept, or the point on the vertical axis where the 
+regression line crosses the vertical y-axis
+
+
+--- Page 7 ---
+Recap - regression
+
+
+--- Page 8 ---
+! Regression analysis is the generic term for several 
+statistical tests for evaluating the relationship between 
+interval level dependent and independent variables.
+! When we are considering the relationship between one 
+dependent variable and one independent variable, we use 
+Simple Linear Regression.
+! When we are considering the relationship between one 
+dependent variable and more than one independent 
+variable, we use Multiple Regression.
+! Regression analysis can help for our interpretation of 
+multivariate and complex data. It can guide in the 
+interpretation (and prediction) of new data.
+Regression Analysis: Definition
+
+
+--- Page 9 ---
+Simple 
+linear regression 
+
+
+--- Page 10 ---
+! The purpose of simple linear regression analysis is to 
+answer three questions that have been identified as 
+requirements for understanding the relationship between 
+an independent and a dependent variable:
+! Is there a relationship between the two variables?
+! How strong is the relationship (e.g. trivial, weak, or 
+strong; how much does it reduce error)?
+! What is the direction of the relationship (high scores are 
+predictive of high or low scores)?
+Simple linear regression: Purpose
+
+
+--- Page 11 ---
+We can have a similar linear regression with a completely different interpretation
+Coefficient de correlation (R ou R2) can assist for the interpretation
+Simple linear regression: 
+
+
+--- Page 12 ---
+Others examples
+Simple linear regression: 
+
+
+--- Page 13 ---
+Others examples
+Simple linear regression: 
+
+
+--- Page 14 ---
+! In this plot, none of the points fall 
+on the regression line.  
+! The difference between the actual 
+value for the dependent variable 
+and the predicted value for each 
+point is shown by the red lines.  
+These differences are called the 
+residuals, and represent the errors 
+between the actual and predicted 
+values.
+y = 0.8 + 0.6 x 
+0
+1
+2
+3
+4
+5
+0
+1
+2
+3
+4
+5
+x
+y
+Simple linear regression: Residuals and errors 
+
+
+--- Page 15 ---
+3
+3
+The best line is the one that minimizes the sum of squared vertical 
+differences between the points and the line.
+"
+"
+"
+"
+4
+1
+1
+4
+(1,2)
+2
+2
+(2,4)
+(3,1.5)
+Sum of squared differences = (2 - 1)2 +(4 - 2)2 +(1.5 - 3)2 +
+(4,3.2)
+(3.2 - 4)2 = 6.89
+2.5
+Let us compute for one line
+Simple linear regression: Estimating the coefficients 
+Example with 4 points
+
+
+--- Page 16 ---
+3
+3
+The best line is the one that minimizes the sum of squared vertical 
+differences between the points and the line.
+"
+"
+"
+"
+4
+1
+1
+4
+(1,2)
+2
+2
+(2,4)
+(3,1.5)
+Sum of squared differences = (2 - 1)2 +(4 - 2)2 +(1.5 - 3)2 +
+(4,3.2)
+(3.2 - 4)2 = 6.89
+2.5
+Let us compare two lines
+The second line is horizontal. 
+What is the Sum of squared differences
+in this case?
+Simple linear regression: Estimating the coefficients 
+Example with 4 points
+
+
+--- Page 17 ---
+3
+3
+The best line is the one that minimizes the sum of squared vertical 
+differences between the points and the line.
+"
+"
+"
+"
+4
+1
+1
+4
+(1,2)
+2
+2
+(2,4)
+(3,1.5)
+Sum of squared differences = (2 - 1)2 +(4 - 2)2 +(1.5 - 3)2 +
+(4,3.2)
+(3.2 - 4)2 = 6.89
+Sum of squared differences = (2 -2.5)2 + (4 - 2.5)2 +(1.5 - 2.5)2 + (3.2 - 2.5)2 = 3.99
+2.5
+Let us compare two lines
+The second line is horizontal
+The smaller the sum of 
+squared differences
+the better the fit of the 
+line to the data.
+Simple linear regression: Estimating the coefficients 
+Example with 4 points
+
+
+--- Page 18 ---
+• SSE = the minimized sum of squares differences 
+between the points and the regression line, also 
+known as "sum of squares about the regression 
+(line)", "sum of squares of the residuals", and "sum 
+of squares errors (SSE)"
+• It can serve as a measure of how well the line fits 
+the data.
+• This statistic plays a role in every statistical 
+technique we employ to assess the model.
+Sum of Squares For Errors
+Simple linear regression: Standard error of estimate 
+
+
+--- Page 19 ---
+[
+]
+÷÷
+ø
+ö
+çç
+è
+æ
+-
+-
+=
+2
+2
+2
+)
+,
+cov(
+)1
+(
+x
+Y
+s
+Y
+X
+s
+n
+SSE
+.
+)
+yˆ
+y(
+SSE
+n
+1
+i
+2
+i
+i
+å
+=
+-
+=
+Sum of Squares For Errors
+Shortcut formula
+Simple linear regression: Standard error of estimate 
+or
+
+
+--- Page 20 ---
+• An unbiased estimator of se2 is given by se2
+Standard Error of Estimate
+2
+n
+SSE
+s
+Estimate
+of
+Error
+dard
+tan
+S
+-
+=
+e
+Simple linear regression: Standard error of estimate 
+SSE = SUM of Squares for Errors
+
+
+--- Page 21 ---
+To calculate the estimates of the coefficients
+that minimize the differences between the data 
+points and the line, use the formulas: 
+x
+b
+y
+b
+s
+)
+Y
+,
+X
+cov(
+b
+1
+0
+2
+x
+1
+-
+=
+=
+The regression equation that estimates
+the equation of the first order linear model
+is: 
+x
+b
+b
+yˆ
+1
+0 +
+=
+Simple linear regression: Estimating the coefficients 
+
+
+--- Page 22 ---
+• The coefficient of correlation is used to 
+measure the strength of association 
+between two variables.
+• The coefficient values range between -1 and 
+1.
+– If r = -1 (negative association) or r = +1 (positive 
+association) every point falls on the regression 
+line.
+– If r = 0 there is no linear pattern.
+• The coefficient can be used to test for linear 
+relationship between two variables.
+Linear regression: Coefficient of Correlation 
+
+
+--- Page 23 ---
+Linear regression: Coefficient correlation 
+
+
+--- Page 24 ---
+• R2 measures the proportion of the variation in 
+y that is explained by the variation in x.
+•
+R2 takes on any value between zero and one.
+R2 = 1: Perfect match between the line and the data points.
+R2 = 0: There are no linear relationship between x and y.
+å
+å
+å
+å
+-
+=
+-
+-
+-
+=
+-
+-
+=
+2
+i
+2
+i
+2
+i
+2
+i
+2
+)y
+y(
+SSR
+)y
+y(
+SSE
+)y
+y(
+)y
+y(
+SSE
+1
+R
+Simple linear regression: Coefficient correlation 
+
+
+--- Page 25 ---
+Simple linear regression: Example 
+Example: Relationship between odometer reading and 
+a used car’s selling price.
+• A car dealer wants to find 
+the relationship between 
+the odometer reading and 
+the selling price of used 
+cars.
+• A random sample of 100 
+cars is selected, and the 
+data recorded.
+• Find the regression line.
+Car Odometer
+Price
+1
+37388
+5318
+2
+44758
+5061
+3
+45833
+5008
+4
+30862
+5795
+5
+31705
+5784
+6
+34010
+5359
+.
+.
+.
+.
+.
+.
+.
+.
+.
+Independent variable  x
+Dependent variable  y
+
+
+--- Page 26 ---
+Solving by hand:To calculate b0 and b1 we need to calculate several 
+statistics first;
+;
+41
+.
+411
+,5
+y
+;
+45
+.
+009
+,
+36
+x
+=
+=
+256
+,
+356
+,1
+99
+298
+,
+269
+,
+134
+1
+)
+)(
+(
+)
+,
+cov(
+688
+,
+528
+,
+43
+99
+277
+,
+340
+,
+309
+,4
+1
+)
+(
+2
+2
+-
+=
+-
+=
+-
+-
+-
+=
+=
+=
+-
+-
+=
+å
+å
+n
+y
+y
+x
+x
+Y
+X
+n
+x
+x
+s
+i
+i
+i
+x
+where  n = 100.
+533
+,6
+)
+45
+.
+009
+,
+36
+)(
+0312
+.
+(
+41
+.
+5411
+x
+b
+y
+b
+0312
+.
+688
+,
+528
+,
+43
+256
+,
+356
+,1
+s
+)
+Y
+,X
+cov(
+b
+1
+0
+2
+x
+1
+=
+-
+-
+=
+-
+=
+-
+=
+-
+=
+=
+x
+0312
+.
+533
+,6
+x
+b
+b
+yˆ
+1
+0
+-
+=
++
+=
+Example: Relationship between odometer reading and 
+a used car’s selling price.
+Simple linear regression: Example 
+
+
+--- Page 27 ---
+•
+Calculate the standard error of estimate for the car dealer example, and 
+describe what does it tell you about the model fit?
+Calculated before
+Compared with the  mean value of y
+the standard error is relatively small .  
+4.
+411
+,5
+y
+,6.
+151
+s
+=
+=
+e
+Simple linear regression: Example
+Standard error of estimate 
+6.
+151
+98
+363
+,
+251
+,2
+2
+n
+SSE
+s
+,
+Thus
+363
+,
+252
+,2
+688
+,
+528
+,
+43
+)
+256
+,
+356
+,1
+(
+)
+999
+,
+64
+(
+99
+s
+)
+Y
+,
+X
+cov(
+s)1
+n
+(
+SSE
+999
+,
+64
+99
+890
+,
+434
+,6
+1
+n
+)
+yˆ
+y(
+s
+2
+2
+x
+2
+Y
+2
+i
+i
+2
+Y
+=
+-
+=
+=
+-
+-
+=
+-
+-
+=
+=
+=
+-
+-
+=
+e
+å
+2
+
+
+--- Page 28 ---
+– Find the coefficient of determination for the 
+car example; what does this statistic tell you 
+about the model?
+• Solution
+– Solving by hand;
+• From the regression output we have
+65% of the variation in the auction
+selling price is explained by the 
+variation in odometer reading.  The
+rest (35%) remains unexplained by
+this model.
+Simple linear regression: Example
+6501
+.
+s
+s
+)]
+Y
+,
+X
+[cov(
+R
+)
+999
+,
+64
+)(
+688
+,
+528
+,
+43
+(
+]
+256
+,
+356
+,1
+[
+2
+y
+2
+x
+2
+2
+2
+=
+=
+=
+-
+
+
+--- Page 29 ---
+• Do not assume that a linear relationship between variables 
+means that there is a cause and effect relationship between 
+those variables. 
+• We cannot infer a causal relationship from statistics alone. 
+Causal relationships must be justified by reasonable 
+theoretical relationships. 
+• Do not interpret the work "explained" in relation to R2 to 
+mean "caused". 
+• In the car example, we might conclude that decreasing the 
+odometer reading would cause the price to rise. This 
+conclusion may not be entirely true. 
+• It is theoretically possible that the price is determined by the 
+overall condition of the car and that condition worsens when 
+the car is driven longer. 
+You still need to use your brain to not make wrong 
+assumption on the cause and effect relationships
+Simple linear regression: Coefficient correlation 
+
+
+--- Page 30 ---
+• An outlier is an observation that is unusually 
+small or large.
+• Several possibilities need to be investigated 
+when an outlier is observed:
+– There was an error in recording the value.
+– The point does not belong in the sample.
+– The observation is valid.
+• Identify outliers from the scatter diagram.
+• It is customary to suspect an observation is an 
+outlier if its |standard residual| > 2
+Outliers 
+
+
+--- Page 31 ---
+Experimental error or
+something important?
+A single “bad” point can destroy a good correlation
+Outliers - To keep in mind when you develop a model
+•
+It is assumed to suspect an observation as outlier if its |standard residual| > 2
+
+
+--- Page 32 ---
+Multiple 
+linear regression 
+Multiple linear regression: 
+
+
+--- Page 33 ---
+Multiple linear regression: 
+When can we apply multiple linear regression
+
+
+--- Page 34 ---
+When multiple linear regression is suitable?
+Multiple linear regression: 
+
+
+--- Page 35 ---
+Multiple linear regression: 
+
+
+--- Page 36 ---
+Multiple linear regression: 
+
+
+--- Page 37 ---
+• The adjusted R2: In Multiple linear regression, we can
+observe than the more you have variables, the more 
+your R2 increase.
+• To avoid an over interpretation you can compute the 
+adjusted R2 which provide a little less bias
+With n, the number of individual and k, the number of variables.
+Multiple linear regression: 
+
+
+--- Page 38 ---
+Use the command lm in R to run MLR analysis
+For example
+• mon.modele = lm(score ~ ., data = train[, 1:33])
+Then if you want to use the model developped for prediction, 
+use the function ‘predict ’
+• test.prediction = predict (mon.modele.lm, newdata = test[, 
+1:33])
+Multiple linear regression in R: 
+
+
+--- Page 39 ---
+Processing: 
+Several steps are 
+needed to assess the 
+performance of your 
+model
+Protein_pocket_data
+Computing  pocket variables
+Remove variables 
+correlation, collinearity…
+Modele development (lm)
+R, R2, residuals, RMSEP
+Variables selections (step)
+Prediction on a 
+test set (predict)
+Modele development 2 (lm)
+R, R2, residuals, RMSEP 
+(if possible)
+Interpretation, conclusion
+
+
+--- Page 40 ---
+Model’s quality
+Processing: 
+In R, you can analyze
+the quality of your
+model. Specially the 
+residuals.
+Par(mfrow=c(2,2)); 
+plot (model)
+
+
+--- Page 41 ---
+Model’s quality: Residuals
+Processing: 
+For each individual (pocket in this example), the farther are the dots from 0, the higher is the 
+difference between the real and predicted values.
+
+
+--- Page 42 ---
+Model’s quality: Standardized Residuals
+Processing: 
+For each individual (pocket in this example), the farther are the dots from 0, the higher is the 
+difference between the real and the standardized residuals. As a standardized residuals
+measure the significance of the difference between observed and expected values, a value < -
+2 or > 2 is suspect
+To compute a standardized
+residual:
+Standardized residual = (observed count –
+expected count) / √expected count
+
+
+--- Page 43 ---
+Model’s quality: Normal Q-Q
+Processing: 
+The graph allow to check if your residuals follow a normal distribution and so your model is
+valid
+
+
+--- Page 44 ---
+Model’s quality: Cook distance
+Processing: 
+The Cook distance compare the coefficients 
+when an individual is not involved in the 
+model.
+The formula is
+Technically, Cook’s D is calculated by removing the ith data point from the model and
+recalculating the regression. It summarizes how much all the values in the regression
+model change when the ith observation is removed. it’s a way to identify points that
+negatively affect your regression model.
+
+
+--- Page 45 ---
+Conclusion in Multiple Linear Regression 
+•
+Multiple linear regression are widely used in data analysis with continuous data 
+(essentially in QSAR methods in cheminformatics)
+•
+Methods to apply with continuous data. Can be used for class and categories with 
+small modifications in the data processing.
+•
+Performance of the models built by these methods need to be included to assess 
+the relevance and robustness of the models developped (R2, Q2, RMSE…)
+•
+Before to apply these methods, try to define the question you want to answer. It 
+needs to have a meaning. A model on wines will not be applicable on water.
+
+
+=== Fin du document : ./CoursPDF/4.RLM_ot_2024.pdf ===
+

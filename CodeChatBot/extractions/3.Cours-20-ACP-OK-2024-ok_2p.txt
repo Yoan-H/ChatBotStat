@@ -1,0 +1,1336 @@
+=== Début du document : ./CoursPDF/3.Cours-20-ACP-OK-2024-ok_2p.pdf ===
+
+--- Page 1 ---
+09/01/2024
+1
+MÉTHODES NON SUPERVISÉES
+Classes ou groupes non connus
+N objets / individus décrits par p variables
+Classification automatique
+• Quelles variables ? 
+• quelle distance choisir ? Par défaut, distance enclidienne pondérée (adapter 
+selon variable et domaine d’étude)
+• Pour HC: 
+• quel critère d’agrégation choisir ? par défaut, critère de Ward (ward.D2)
+• agrège les clusters qui minimisent la diminution de l’inertie intergroupe
+• regroupe des clusters ayant des centres de gravité (barycentre) proches
+• Analyse de la structure de la classification: choix du nombre de groupe 
+guidé par la diminution de la variabilité intra-classe et distance des 
+branches
+• Pour K-means, 
+• importance de l’optimisation : comparer plusieurs n-start 
+• Choix du nb de classes k avec critère d’inertie
+Analyse a posteriori possible de classes en fonction des descripteurs (  
+
+
+--- Page 2 ---
+09/01/2024
+2
+Classification automatique
+
+
+--- Page 3 ---
+09/01/2024
+3
+
+
+--- Page 4 ---
+09/01/2024
+4
+Heatmap
+
+
+--- Page 5 ---
+09/01/2024
+5
+K-means
+
+
+--- Page 6 ---
+09/01/2024
+6
+EXEMPLE DE 15 VILLES FRANÇAISES :
+12 paires de variables
+vizualisation par 2 ou 3 variables
+EXEMPLE DE 15 VILLES FRANÇAISES :
+
+
+--- Page 7 ---
+09/01/2024
+7
+MÉTHODES FACTORIELLES
+objectif :  visualiser et analyser des données multidimensionnelles (grand 
+nombre de variables )
+èprise eu compte simultanée des variables
+è exploitent la redondance pour remplacer les variables initiales par un 
+nombre réduit de nouvelles variables sans perdre trop d'information.  
+Comment représenter les données et comprendre leur 
+structure ?
+l'analyse en composantes principales (ACP) construit des nouvelles variables, combinaisons 
+linéaires des variables initiales, non corrélées linéairement. 
+ANALYSE EN COMPOSANTES 
+PRINCIPALES : PCA
+Pearson, 1903 ; Hotelling, 1933
+Les psychologues américains,  Speannan,  Burt et Thurstone, résument les 
+résultats de nombreux tests psychologiques par un facteur général d'aptitude
+
+
+--- Page 8 ---
+09/01/2024
+8
+Méthodes de projection multivariée pour
+l'exploration de grands ensembles de données
+?
+?
+Méthodes de projection multivariée pour
+l'exploration de grands ensembles de données
+
+
+--- Page 9 ---
+09/01/2024
+9
+Synthétiser les informations en termes de dispersion 
+du nuage : information de variance
+Recherchez l’axe factoriel ou composante 
+principale (PC) le/la plus informatif 
+Premier PC pour lequel la variance est 
+maximisée
+
+
+--- Page 10 ---
+09/01/2024
+10
+Maximiser la variance de cette composante : les points sont les plus dispersés 
+possible.
+Projeter les points de données sur le premier PC
+Deuxième PC, orthogonal au premier PC,
+pour lequel la variance restante est maximisée  
+Projetez les données sur le deuxième PC, puis le 
+troisième PC,...
+1 Conserver le nombre de PC qui expliquent " suffisamment " la variance 
+des données.
+
+
+--- Page 11 ---
+09/01/2024
+11
+First PC for which the variance is maximised
+la variance est l'information contenue dans les données
+Variables originales
+I= 3,45
+Remplacer les variables d'origine par le PC : PC1, PC2, PC3
+orthogonales les unes aux autres (covariance = 0)
+Nous avons I= 1,65 + 1,22 + 0,58 = 3,45
+1.34
+-0.16
+0.19
+Cov(x, y, z) =                            -0,01
+0.62
+-0.13
+0 .19
+-0.13
+1.48
+1.34/3.45=39%, 0.62/3.45= 18%, 1.45/3.45= 42% 
+1.65/3.45= 48%, 1.22/3.45= 35%, 0.58/3.45= 17%
+Premier plan (PC1 , PC2 ) : (1.6513+1.2202)/3.4484 = 83.3% 
+48%
+35%
+1.65
+0
+0
+Cov(PC1 , PC2 , PC 3) =                         0
+1.22
+0
+0
+0
+0.57
+24
+ANALYSE EN COMPOSANTES 
+PRINCIPALES: PCA
+
+
+--- Page 12 ---
+09/01/2024
+12
+MÉTHODES FACTORIELLES :
+Recherche des directions (= axes factoriels) 
+- les + informatives  du nuage, 
+- qui capturent la maximum de la variabilité des données, 
+- selon lesquelles le nuage de points s’écarte le plus de la moyenne à l’aide du 
+critère des moindres carrés
+Recherche des axes d’inertie du nuage : + grands axes de
+l'ellipsoïde d'inertie associé à la matrice de variance-covariance 
+Recherche de 
+- l'axe le plus informatif ou composantes principales (CP) capturant la 
+plus grande variabilité des données 
+- axes les + longs de l'ellipsoïde d'inertie associé à la matrice cov V 
+obtenue par diagonalisation de la matrice de covariance V
+V(p,p) ~ Mt(p,n). M (n,p)# D (n,n)~ M (n,p). M t(p,n)
+Matrice de covariance V des variables ≠ matrice de distance D entre individus
+mais correspondant à un même ellipsoïde d'inertie.
+RECHERCHE DES AXES D'INERTIE PRINCIPAUX
+
+
+--- Page 13 ---
+09/01/2024
+13
+PRINCIPE
+• trouver le meilleur plan = maximiser ∑(OHi)2
+• comment quantifier la qualité d’une image ?
+• notion de dispersion ou variabilité, appelée Inertie
+• comment
+trouver
+la
+meilleur
+image approchée
+du
+nuage des individus ?
+• trouver l’axe qui déforme le moins possible le nuage de point, 
+axe de variabilité maximale, tel que :
+A
+D
+B 
+-
+A
+C
+P
+4
+7
+i
+(iHi)2 petit, (OHi)2 grand
+=> ∑(OH )2 grand
+i
+i
+min
+max
+O
+H
+i
+axe 1
+==> Critère d'ajustement d'un sous-espace à un nuage de N points
+par le critère des moindres carrés
+DIAGONALISATION D'UNE MATRICE SYMÉTRIQUE
+p axes de symétrie de 
+l'ellipsoïde d'inertie
+p valeurs propres
+~ (λ1,λ2,.,λp)
+Diagonalisation
+V
+
+
+--- Page 14 ---
+09/01/2024
+14
+DIAGONALIZATION OF A SYMMETRIC 
+MATRIX
+p inertia axes = p axes factoriels
+p linear combination of initial variables (x1, x2, ..,xp)
+p eigenvectors of the covariance matrix
+p eigen values = p variability part (inertia) explained
+by each axis
+Projection of n individuals on p successive axes (by scalar 
+product)  in decreasing order of the eigen values (% of 
+explained variance)
+λi
+P components as the rank p of the matrix X
+EN MATHÉMATIQUES
+A
+D
+B 
+-
+A
+C
+P
+4
+9
+• A partir de la matrice de covariance ou corrélation des données 
+initiales
+• ses valeurs propres sont réelles et positives
+• les p axes factoriels sont engendrés par les p vecteurs propres unitaires 
+associés aux p valeurs propres de la matrice de corrélation
+• en pratique
+• on diagonalise la matrice de corrélation
+• le vecteur propre associé à la plus grande valeur propre définit le 
+premier axe factoriel
+• le vecteur associé à la deuxième plus grande valeur propre, 
+perpendiculaire au premier définit le deuxième axe factoriel
+• Les valeurs propres correspondent à la part de variabilité expliquée 
+par l’axe
+
+
+--- Page 15 ---
+09/01/2024
+15
+1 Rechercher la première PC pour lequel la 
+variance est maximale.
+2 Projeter les points sur la première PC
+3 Chercher la deuxième PC qui est orthogonale 
+à la première PC1.
+4 Projeter les points sur la seconde PC
+5 Et ainsi de suite jusqu'à ce que nous 
+expliquions suffisamment la variance des 
+données.
+- 1 . 0  - 0 . 5  0 . 0
+0 . 5  1 . 0
+-0 . 4  -0 . 2  0 . 0  0 . 2  0 . 4
+x 1
+x 2
+Recherche de la 
+variance maximale
+- 1 . 0  - 0 . 5  0 . 0
+0 . 5  1 . 0
+z 2
+-0 . 4  -0 . 2  0. 0  0 . 2  0 . 4
+z 1
+Projeter dans un nouveau 
+sous-espace
+09/01/2024
+AC Camproux
+33
+Algorithme itératif
+ANALYSE EN COMPOSANTES PRINCIPALES :
+PCA
+X quantitative ou mélanges de quantitative et qualitative 
+Différentes étapes :
+- Centrez les données : Xc
+- Calculez la matrice de variance/covariance V= cov(X) 
+ou matrice de corrélation cor (X) 
+- Diagonaliser V :  * p axes factoriels 
+* p valeurs propres correspondantes 
+- Projeter le nuage de points sur les principaux axes factoriels (sur p axes 
+successifs par produit scalaire dans l'ordre décroissant des valeurs propres, 
+% de variance expliquée) 
+PCA : projection des données sur les plans
+factoriels permettant de capturer le maximum de
+variabilité des data
+
+
+--- Page 16 ---
+09/01/2024
+16
+L’ACP en pratique
+Tuning PCA
+Comment interpréter un PCA ?
+1. Combien de p' composantes principales PC (valeurs propres ?)
+2. Interprétation des composants :
+quelle est la contribution de chaque variable au PC de l'axe p' ?
+3. Interprétation des grappes/unités ?
+Étude de la qualité de la représentation des unités sur le p' PC
+
+
+--- Page 17 ---
+09/01/2024
+17
+COMBIEN D'AXES À CONSIDÉRER ?
+• pas toujours une solution claire !
+– ne garder que les axes informatifs : inertie minimale (5%) expliquée par axe 
+– fixer a priori un pourcentage minimum cumulé d'inertie : 80% ?
+– histogramme cumulatif de l'inertie : présence du coude
+indiquent toujours l'inertie expliquée par les axes ACP
+Ligne 2 Ligne 3 Ligne 4 Ligne 5 Ligne 6 Ligne 7
+0
+2
+4
+6
+8
+10
+12
+14
+Colonne A
+PCA. EXEMPLE DE TEMPÉRATURES
+valeur propre 
+l i
+% de variance 
+expliquée
+variance 
+expliquée 
+cumulée
+comp 1
+9,58
+79,85
+79,85
+comp 2
+2,28
+18,97
+98,82
+comp 3
+0,07
+0,58
+99,40
+comp 4
+0,04
+0,33
+99,73
+comp 5
+0,01
+0,12
+99,85
+comp 6
+0,01
+0,07
+99,92
+comp 7
+0,01
+0,05
+99,97
+comp 8
+0,00
+0,01
+99,98
+comp 9
+0,00
+0,01
+99,99
+comp 10
+0,00
+0,00
+100,00
+comp 11
+0,00
+0,00
+100,00
+comp 12
+0,00
+0,00
+100,00
+λi
+λi
+i=1
+p
+∑
+1. Combien de composants ?
+l i
+Janv
+Fevri
+Mars
+Avril
+Mai
+Juin
+Juillet
+Aout
+Sept
+Octob
+Nov
+Déc.
+variance
+4,0
+3,5
+2,3
+2,0
+2,3
+3,2
+4,5
+4,0
+3,4
+3,3
+3,3
+3,8
+
+
+--- Page 18 ---
+09/01/2024
+18
+PCA. EXEMPLE DE TEMPÉRATURES
+valeur propre 
+li
+% de la variance 
+expliquée
+variance 
+expliquée 
+cumulative
+comp 1
+9,58
+79,85
+79,85
+comp 2
+2,28
+18,97
+98,82
+comp 3
+0,07
+0,58
+99,40
+comp 4
+0,04
+0,33
+99,73
+comp 5
+0,01
+0,12
+99,85
+comp 6
+0,01
+0,07
+99,92
+comp 7
+0,01
+0,05
+99,97
+comp 8
+0,00
+0,01
+99,98
+comp 9
+0,00
+0,01
+99,99
+comp 10
+0,00
+0,00
+100,00
+comp 11
+0,00
+0,00
+100,00
+comp 12
+0,00
+0,00
+100,00
+λi
+λi
+i=1
+p
+∑
+1. Combien de composants ?
+li
+Jan
+Fevri
+Mars
+Avril
+Mai
+Juin
+Juillet
+Août
+Sept
+Octob
+Nov
+Déc.
+variance
+4,0
+3,5
+2,3
+2,0
+2,3
+3,2
+4,5
+4,0
+3,4
+3,3
+3,3
+3,8
+12
+Tuning PCA
+Comment interpréter un PCA ?
+1. Combien de p' composantes principales PC (valeurs propres ?)
+2. Interprétation des composants :
+quelle est la contribution de chaque variable au PC de l'axe p' ?
+3. Interprétation des grappes/unités ?
+Étude de la qualité de la représentation des unités sur le p' PC
+
+
+--- Page 19 ---
+09/01/2024
+19
+ACP : interprétation des composantes
+Contribution de chaque variable aux CP
+Comment les variables contribuent-elles au plan ?
+Quelles variables sont associées, opposées ?
+ACP : interprétation des composantes
+Contribution de chaque variable au PC
+La contribution d'une variable (j) à un axe s est obtenue en calculant sa
+contribution à la corrélation à l'axe
+Ctrs
+j =
+r(x.j,vs)2
+r(x.j,vs)2
+j=1
+J
+∑
+(x100)
+
+
+--- Page 20 ---
+09/01/2024
+20
+4
+3
+ADB - ACP
+les variables avec une forte coordonnée contribuent le plus
+seules les variables bien représentées peuvent être interprétées
+EXEMPLE de TEMPERATURES
+
+
+--- Page 21 ---
+09/01/2024
+21
+Avec factominer
+bibliothèque(FactoMineR)
+dt.acp = PCA(dt)
+dt.acp$ind$contrib
+PC1
+PC2
+janvier
+0,58
+0,42
+février
+0,78
+0,22
+mars
+0,94
+0,02
+avril
+0,94
+-0,04
+mai
+0,76
+-0,23
+juin
+0,75
+- 0,25
+juillet
+0,71
+-0,28
+aout
+0,81
+-0,18
+septembre
+0,95
+- 0,04
+octobre
+0,96
+0,03
+novembre
+0,82
+0,17
+décembre
+0,60
+0,39
+EXEMPLE de TEMPERATURES :
+Contribution des variables : Les variables ayant de fortes coordonnées contribuent le plus
+1. Combien de composantes principales p’ (valeurs propres ?)
+2. Interprétation des composants :
+quelle est la contribution de chaque variable à chaque axe p' ?
+3. Interprétation des groupes/individus ?
+Étude de la qualité de la représentation des individus sur chaque
+axe (PC)
+Tuning PCA
+Comment interpréter un PCA ?
+
+
+--- Page 22 ---
+09/01/2024
+22
+Les cercles de corrélation permettent de comprendre la relation entre les 
+variables (structure de corrélation).
+variables et échantillons
+Échantil
+lons
+Variables
+Analyse en composantes principales :
+09/01/2024
+47
+3. Etude de la qualité de la représentation des unités sur un
+plan
+Inertie projetée / inertie totale
+Qualité(k) = cos 2 (Q) 
+= d 2(O, CPi
+k ) / d 2(O,k)
+O
+k
+CP k
+i
+q
+INTERPRÉTATION DE LA PCA
+
+
+--- Page 23 ---
+09/01/2024
+23
+AVEC FACTOMINER
+library(FactoMineR) 
+dt.acp = PCA(dt) 
+dt.acp$ind$cos2
+61
+A
+D
+B 
+-
+A
+C
+P
+Qualité.                 PC1
+PC2
+Bordeaux
+0,95
+0,00
+Brest
+0,23
+0,76
+Clermont
+0,88
+0,10
+Grenoble
+0,43
+0,52
+Lille
+0,97
+0,02
+Lyon
+0,18
+0,82
+Marseille
+0,96
+0,03
+Montpellier
+0,99
+0,01
+Nantes
+0,06
+0,89
+Nice
+0,98
+0,02
+Paris
+0,89
+0,01
+Rennes
+0,42
+0,57
+Strasbourg
+0,78
+0,22
+Toulouse
+0,95
+0,01
+Vichy
+0,92
+0,06
+3. Etude de la qualité de la représentation des unités sur un plan
+Comment sont les unités ?
+Y a-t-il des unités aberrantes ?
+Quelles unités sont des clusters, opposées ?
+* Proximité entre les unités = similaires en termes de valeurs variables
+* la distance entre deux unités ne reflète leur proximité que si elles sont bien
+représentées sur le plan
+INTERPRÉTATION DE LA PCA
+
+
+--- Page 24 ---
+09/01/2024
+24
+ILLUSTRATION PCA
+Tuning PCA
+Trois étapes pour interpréter un PCA ?
+1. Combien de p' composantes principales PC (valeurs propres ?)
+2. Interprétation des composantes :
+quelle est la contribution de chaque variable au PC de l'axe p' ?
+3. Interprétation des groupes/unités ?
+Étude de la qualité de la représentation des unités sur la p' PC
+
+
+--- Page 25 ---
+09/01/2024
+25
+PRINCIPE
+A
+D
+B 
+-
+A
+C
+P
+5
+3
+• ajustement du nuage des individus et du nuage des variables
+• l’ACP consiste
+• à remplacer les variables initiales (les données)
+• par de nouvelles variables (les Composantes Principales)
+• de variance maximale,
+• non corrélées deux à deux
+• qui sont des combinaisons linéaires des variables d’origine
+• CP1
+• combinaison linéaire des variables expliquant le mieuxla 
+variabilité de l’échantillon
+• déterminée par la direction dans laquelle le nuage de points a 
+son allongement maximal
+A
+D
+B 
+-
+c
+l
+u
+s
+t
+e
+r
+i
+n
+g
+EXAMPLE OF THE TEMPERATURES CAH
+
+
+--- Page 26 ---
+09/01/2024
+26
+A
+D
+B 
+-
+c
+l
+u
+s
+t
+e
+r
+i
+n
+g
+• Bordeaux Brest Clermont Grenoble Lille Lyon Marseille 
+•
+1      2      3      3      3      3      1 
+•Montpellier Nantes Nice Paris Rennes Strasbourg Toulouse Vichy
+•
+1      2      1      3      2      3      1 
+3
+EXAMPLE OF K-MEANS TEMPERATURES
+PCA. EXEMPLE DE TEMPÉRATURES
+valeur propre 
+l i
+% de variance 
+expliquée
+variance 
+expliquée 
+cumulée
+comp 1
+9,58
+79,85
+79,85
+comp 2
+2,28
+18,97
+98,82
+comp 3
+0,07
+0,58
+99,40
+comp 4
+0,04
+0,33
+99,73
+comp 5
+0,01
+0,12
+99,85
+comp 6
+0,01
+0,07
+99,92
+comp 7
+0,01
+0,05
+99,97
+comp 8
+0,00
+0,01
+99,98
+comp 9
+0,00
+0,01
+99,99
+comp 10
+0,00
+0,00
+100,00
+comp 11
+0,00
+0,00
+100,00
+comp 12
+0,00
+0,00
+100,00
+λi
+λi
+i=1
+p
+∑
+1. Combien de composants ?
+l i
+Janv
+Fevri
+Mars
+Avril
+Mai
+Juin
+Juillet
+Aout
+Sept
+Octob
+Nov
+Déc.
+variance
+4,0
+3,5
+2,3
+2,0
+2,3
+3,2
+4,5
+4,0
+3,4
+3,3
+3,3
+3,8
+
+
+--- Page 27 ---
+09/01/2024
+27
+EXEMPLE de TEMPERATURES
+Avec factominer
+bibliothèque(FactoMineR)
+dt.acp = PCA(dt)
+dt.acp$ind$contrib
+PC1
+PC2
+janvier
+0,58
+0,42
+février
+0,78
+0,22
+mars
+0,94
+0,02
+avril
+0,94
+-0,04
+mai
+0,76
+-0,23
+juin
+0,75
+- 0,25
+juillet
+0,71
+-0,28
+aout
+0,81
+-0,18
+septembre
+0,95
+- 0,04
+octobre
+0,96
+0,03
+novembre
+0,82
+0,17
+décembre
+0,60
+0,39
+EXEMPLE de TEMPERATURES :
+Contribution des variables : Les variables ayant de fortes coordonnées contribuent le plus
+
+
+--- Page 28 ---
+09/01/2024
+28
+température moyenne
+faible
+élevé
+EXEMPLE de TEMPERATURES :
+premier axe
+température moyenne
+faible
+élevé
+printemps 
+- été
+automne -
+hiver
+hiver 
+doux
+été chaud
+EXEMPLE de TEMPERATURES :
+premier axe
+
+
+--- Page 29 ---
+09/01/2024
+29
+température moyenne
+faible
+élevé
+hiver 
+doux
+été chaud
+EXEMPLE de TEMPERATURES :
+Représentation des villes
+Avec factominer
+bibliothèque(FactoMineR)
+dt.acp = PCA(dt)
+dt.acp$var$cos2
+dt.acp$ind$cos2
+PC1
+PC2
+Bordeaux
+0,95
+0,00
+Brest
+0,23
+0,76
+Clermont
+0,88
+0,10
+Grenoble
+0,43
+0,52
+Lille
+0,97
+0,02
+Lyon
+0,18
+0,82
+Marseille
+0,96
+0,03
+Montpellier
+0,99
+0,01
+Nantes
+0,06
+0,89
+Nice
+0,98
+0,02
+Paris
+0,89
+0,01
+Rennes
+0,42
+0,57
+Strasbourg
+0,78
+0,22
+Toulouse
+0,95
+0,01
+Vichy
+0,92
+0,06
+
+
+--- Page 30 ---
+09/01/2024
+30
+Résultats ACP
+Facteur 1: 12 mois corrélés, liés - sur axe1  : villes avec températures (Q) 
+élevées pour 12 moiss'opposent aux  villes avec Q faibles
+Q> moyenne, partie gauche (villes chaudes) 
+Q < moyenne, partie droite (villes froides) 
+Facteur 2 : (à Q moyenne annuelle =) mois froids # mois chauds :
+ville continentale: chaude été, froide hiver s’oppose à # ville océane : froide été, chaude hiver
+k-means
+
+
+--- Page 31 ---
+09/01/2024
+31
+n = 10 variétés de blé tendre décrites par p= 5 variables
+EXEMPLE DES 10 VARIETES DE BLE
+HEP = hauteur de l’épi dans la tige (cm)
+QTE = quantité d’eau contenue dans le grain (decig)
+PMS = poids de matière sèche du grain
+EM2 = nombre d’épis /m2
+GM2 = nombre de grains /m2
+X
+HEP  QTE  PMS EM2   GM2
+1   17,6 350   380   596  17046
+2   20,2 340   330   522  18192
+3   47,1 290   350   502  16854
+4   64,3 300   350   515  15686
+5   28,8 300   290   533  17274
+6   12,9 320   250   552  19798
+7   15,7 330   340   568  15462
+8   17,7 310   370   557  15808
+9   58,9 260   330   635  12202
+10  33,8 300   380   517  14282
+HEP    QTE     PMS      EM2      GM2
+Moyenne 31.7      310.0     337.0     549.7       16260.4
+Var    354.3     688.9    1667.8    1712.    4422147.3
+épis provenant de 37 variétés de blé tendre 
+décrits par 5 variables
+HEP = hauteur de l’épi dans la tige (cm)
+QTE = quantité d’eau contenue dans le grain (decig)
+PMS = poids de matière sèche du grain
+EM2 = nombre d’épis /m2
+GM2 = nombre de grains /m2
+
+
+--- Page 32 ---
+09/01/2024
+32
+INTERPRETATION DE L’ACP
+•
+normaliser les données
+•
+commenter le nombres d’axes  conservé et  la part de variabilité expliquée
+•
+lors de l’interprétation
+– les points proche du centre ne sont pas interprétables
+– les individus ayant une trop forte contribution sont à étudier avec précaution
+•
+utiliser ses connaissances pour aider à l’interprétation
+est une première étape (presque) obligatoire dans 
+l'analyse exploratoire des données pour
+§ comprendre la structure des données sous-jacentes
+§ identifier les biais, les erreurs expérimentales, ....
+Des sorties graphiques perspicaces pour :
+pour visualiser les échantillons dans un sous-espace plus petit 
+(composants 'scores')
+de visualiser la relation entre les variables et les échantillons (cercles 
+de corrélation)
+Utilité de l'ACP
+
+
+--- Page 33 ---
+09/01/2024
+33
+Les problèmatiques
+Rechercher des groupes de gènes 
+partageant les mêmes profils dexpressions 
+è analyse fonctionnelle
+Rechercher des groupes dexpériences 
+dont lexpression des gènes est similaires
+~6000 gènes mesurés sur 6 temps
+Chu et al
+Exemple : recherche des gènes sur- et sous-exprimés 
+dans le cycle de sporulation de la levure
+Projection sur les 2 premiers temps
+ACP = projection du nuage sur le(s) plan(s)
+qui capture(nt) le maximum de variabilité
+Comment interpréter une ACP ?
+Vérifier la part de variabilité expliquer par le premier plan
+
+
+--- Page 34 ---
+09/01/2024
+34
+EXEMPLES
+7
+3
+http://home.deib.polimi.it/matteucc/Clustering/tutorial_html/
+http://www.mathworks.com/matlabcentral/fileexchange/24616-kmeans-clustering
+ACP normalisées  (27.6%  + 26.2% + 24.9%  = 78 %)
+Analyse de 109 poches protéiques
+74
+
+
+--- Page 35 ---
+09/01/2024
+35
+Visualisation de la matrice corrélation
+11
+Analyse des poches protéiques: 103 descripteurs 
+Visualisation du cercle de corrélation de l’ACP
+09/01/2024
+AC Camproux
+75
+
+
+--- Page 36 ---
+09/01/2024
+36
+Utilité de l'ACP
+Utilisé pour :
+- Détection des valeurs aberrantes 
+- Regroupement d'unités similaires 
+- Analyse des descripteurs
+-Descripteurs/clusters de la double analyse
+-Diminution de la dimension des données pour (PLS, LD-PCA, ...)
+-Dans Drug design : analyse de la diversité moléculaire
+- technique de décomposition de la matrice qui permet de réduire la 
+dimension
+- Effectuez d'abord une ACP pour comprendre les sources de variation de 
+vos données.
+En dehors de l'ACP destinée aux tableaux de variables quantitatives; les
+principales
+méthodes
+factorielles
+sont
+l'analyse
+factorielle
+des
+correspondances (AFC) pour les tableaux de contingence, l'analyse des
+correspondances
+multiples
+(AACM)
+pour
+les
+tableaux
+de
+variable
+qualitatives, l'analyse factorielle d'un tableau de distances (AFTD) pour les
+tableaux de proximités et, l'analyse factorielle discriminante qui permet de
+mettre en évidence les différences entre des individus issus de plusieurs
+classes.
+
+
+--- Page 37 ---
+09/01/2024
+37
+≠VARIANTES 
+≠calculs de distances selon la nature des données :
+- lignes : individus / catégories 
+- colonnes : variables quantitatives / qualitatives 
+ANALYSE EN COMPOSANTES PRINCIPALES (ACP) 
+Objets décrits par des variables quantitatives
+* Matrice de variance ou de corrélation
+ANALYSE FACTORIELLE  (AFC) 
+Tableau de contingence ou comptage = croisement de variables qualitatives 
+* Métrique du chi2
+Méthodes factorielles 
+Etudes
+Droit
+sci.eco
+Sciences
+Médecine
+Pharma
+Pluri
+IUT
+CSP père
+exp.agri
+sal.agri
+Patron
+cad.sup
+cd.moy
+Emp
+Ouv
+Service
+Autres
+test du χ² (χ²cal > 475 ; χ²théo = 57.)
+Les deux variables Etudes et Profession du père sont liées
+Analyse factorielle des correspondances
+(AFC)
+
+
+--- Page 38 ---
+09/01/2024
+38
+ 
+ 
+ANALYSE DES DONNÉES :
+QUELLES MÉTHODES UTILISER ?
+Réalité
+:
+résultat
+complexe
+impliquant
+de
+nombreuses
+variables
+
+
+--- Page 39 ---
+09/01/2024
+39
+Analyse factorielle des correspondances
+H0 : 2 variables sont indépendantes
+H1 : 2 variables sont liées
+test du χ²
+..
+..
+..
+400
+Patron
+..
+..
+..
+125
+Sal. Agricole
+..
+..
+..
+150
+Exp. Agricole
+Médecine
+Sciences
+Sci. Eco
+Droit
+Etude
+Prof père
+Adaptation de l'analyse en composantes principales au cas où les
+variables à représenter sont qualitatives
+Matrice de contingence ou comptage
+distance du c² spécifiquement adaptée aux variables qualitatives
+
+
+--- Page 40 ---
+09/01/2024
+40
+Etudes
+Droit
+sci.eco
+Sciences
+Médecine
+Pharma
+Pluri
+IUT
+CSP père
+exp.agri
+sal.agri
+Patron
+cad.sup
+cd.moy
+Emp
+Ouv
+Service
+Autres
+test du χ² (χ²cal > 475 ; c²théo = 57.)
+Les deux variables Etudes et Profession du père sont liées
+Analyse factorielle des correspondances
+(AFC)
+AFC : Illustration sur l'analyse des boucles 
+protéiques 
+Regad et al, 2011
+
+
+--- Page 41 ---
+09/01/2024
+41
+introduction de variables supplémentaires
+dtp = read.table("temperatureFrancePlus.txt", h=T, sep="\t", dec=",", 
+row.names=1)
+PCA(dtp, quanti.sup=13:16, quali.sup=17)
+variables quantitatives
+amplitude des températures
+température moyenne
+latitude
+longitude
+variables qualitatives
+climat
+88
+ADB - ACP
+résultats de l’Acp
+89
+ADB - ACP
+
+
+--- Page 42 ---
+09/01/2024
+42
+Analyse efficace :
+- Pré-traitement pour vérifier la qualité des données
+- Challenge = choix des technique d'apprentissage 
+appropriée 
+1 choix : 
+technique d'apprentissage supervisée ou non supervisée
+(avec ou sans surveillance) 
+Application préalable des techniques non supervisées
+==> Combiner les techniques
+
+
+=== Fin du document : ./CoursPDF/3.Cours-20-ACP-OK-2024-ok_2p.pdf ===
+
